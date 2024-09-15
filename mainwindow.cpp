@@ -17,7 +17,7 @@ void MainWindow::setup_interface()
     setMinimumSize(220, 100);
     this->setWindowTitle("Login Window");
 
-    setWindowIcon(QIcon("C:/Slava/Qt/15_Puzzle_Game_Images/assets/avatar.jpg"));
+    setWindowIcon(QIcon(":avatar.jpg"));
 
     loginButton = new QPushButton("Login");
     playButton = new QPushButton("Play");
@@ -210,7 +210,7 @@ void MainWindow::startGame()
             if (line == gridSize - 1 && column == gridSize - 1) {
                 cell->setIcon(QIcon()); // Empty cell
             } else {
-                QString imagePath = QString("C:/Slava/Qt/15-Puzzle-Game/assets/%1/game_images/%2.jpg").arg(selectedLevel).arg(line * gridSize + column + 1);
+                QString imagePath = QString(":%1/game_images/%2.jpg").arg(selectedLevel).arg(line * gridSize + column + 1);
                 cell->setIcon(QIcon(imagePath));
             }
 
@@ -254,7 +254,7 @@ void MainWindow::startGame()
 
             QLabel *originalLabel = new QLabel(originalDialog);
 
-            QString originalPixmap = QString("C:/Slava/Qt/15-Puzzle-Game/assets/%1/game_images_origin/game_images_origin.jpg").arg(selectedLevel);
+            QString originalPixmap = QString(":%1/game_images_origin/game_images_origin.jpg").arg(selectedLevel);
             originalLabel->setPixmap(originalPixmap);
             originalLabel->setScaledContents(true);
 
@@ -310,7 +310,7 @@ void MainWindow::checkWin(QList<QPushButton*>& cells, int gridSize)
     QList<QImage> correctImages;
 
     for (int i = 0; i < gridSize * gridSize - 1; ++i) {
-        QPixmap pixmap(QString("C:/Slava/Qt/15-Puzzle-Game/assets/%1/game_images/%2.jpg").arg(selectedLevel).arg(i + 1));
+        QPixmap pixmap(QString(":%1/game_images/%2.jpg").arg(selectedLevel).arg(i + 1));
         correctImages.append(pixmap.toImage());
     }
     correctImages.append(QImage());
@@ -348,7 +348,7 @@ void MainWindow::checkWin(QList<QPushButton*>& cells, int gridSize)
     } else {
         winDialog->resize(400, 400);
         winDialog->setMinimumSize(200, 200);
-        QPixmap winPixmap(QString("C:/Slava/Qt/15-Puzzle-Game/assets/%1/win_image/win.jpg").arg(selectedLevel));
+        QPixmap winPixmap(QString(":%1/win_image/win_image.jpg").arg(selectedLevel));
         winLabel->setPixmap(winPixmap);
         winLabel->setScaledContents(true);
     }

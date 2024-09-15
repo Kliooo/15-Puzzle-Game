@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(15_Puzzle_Game_Images VERSION 0.1 LANGUAGES CXX)
+project(15_Puzzle_Game VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -11,6 +11,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+
+set(RESOURCE_FILES
+    assets/assets.qrc
+)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -23,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(15_Puzzle_Game_Images
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+		${RESOURCE_FILES}
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET 15_Puzzle_Game_Images APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -32,12 +37,14 @@ else()
     if(ANDROID)
         add_library(15_Puzzle_Game_Images SHARED
             ${PROJECT_SOURCES}
+			${RESOURCE_FILES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(15_Puzzle_Game_Images
             ${PROJECT_SOURCES}
+			${RESOURCE_FILES}
         )
     endif()
 endif()

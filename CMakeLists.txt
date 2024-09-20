@@ -28,6 +28,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
 		${RESOURCE_FILES}
+                loginform.h loginform.cpp
+                levelselect.h levelselect.cpp
+                puzzle.h puzzle.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET 15_Puzzle_Game_Images APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

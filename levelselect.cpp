@@ -34,7 +34,7 @@ void VBEK::LevelSelect::setupInterface()
 
         levelLayout->addWidget(levelButtons[i]);
 
-        connect(levelButtons[i], &QPushButton::clicked, this, [this, i]() { emit levelSelected(i + 1); });
+        connect(levelButtons[i], &QPushButton::clicked, [this, i]() { emit levelSelected(i + 1); });
     }
 
     setLayout(levelLayout);

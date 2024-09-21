@@ -57,10 +57,6 @@ void VBEK::LoginForm::onSubmitButtonClicked()
     accept();
 }
 
-QString VBEK::LoginForm::getID() const {
-    return userID;
-}
+QString VBEK::LoginForm::getID() const { return userID; }
 
-QString VBEK::LoginForm::getPassword() const {
-    return userPassword;
-}
+QString VBEK::LoginForm::getPassword() const { return userPassword; }

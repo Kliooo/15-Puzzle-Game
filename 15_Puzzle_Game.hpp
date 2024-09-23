@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef PUZZLE_GAME_15_HPP
+#define PUZZLE_GAME_15_HPP
 
 #include <QApplication>
 #include <QDialog>
@@ -7,10 +7,22 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
-namespace VBEK {
+namespace bva {
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
+
+private:
+    QPushButton *playButton;
+    QPushButton *loginButton;
+    QPushButton *logoutButton;
+    QPushButton *exitButton;
+
+    QString userId;
+
+    int selectedLevel;
+    int levelOffset;
+    bool levelSelectOpen = false;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -23,22 +35,10 @@ private slots:
     void onLevelButtonClicked(int level);
 
 private:
-    bool levelSelectOpen = false;
-
-    int selectedLevel;
-    int levelOffset;
-
     void setupInterface();
     void setupConnections();
-
-    QPushButton *playButton;
-    QPushButton *loginButton;
-    QPushButton *logoutButton;
-    QPushButton *exitButton;
-
-    QString userId;
 };
 
 }
 
-#endif // MAINWINDOW_H
+#endif

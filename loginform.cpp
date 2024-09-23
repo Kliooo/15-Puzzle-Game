@@ -1,13 +1,13 @@
-#include "loginform.h"
+#include "loginform.hpp"
 
-VBEK::LoginForm::LoginForm(QWidget *parent)
+bva::LoginForm::LoginForm(QWidget *parent)
     : QDialog(parent)
 {
     setupInterface();
     setupConnections();
 }
 
-void VBEK::LoginForm::setupInterface()
+void bva::LoginForm::setupInterface()
 {
     setWindowTitle("Login Form");
     resize(300, 120);
@@ -34,14 +34,14 @@ void VBEK::LoginForm::setupInterface()
     setLayout(formLayout);
 }
 
-void VBEK::LoginForm::setupConnections()
+void bva::LoginForm::setupConnections()
 {
     connect(IDInput, &QLineEdit::returnPressed, [this]() { passwordInput->setFocus(); });
-    connect(passwordInput, &QLineEdit::returnPressed, this, &VBEK::LoginForm::onSubmitButtonClicked);
-    connect(submitButton, &QPushButton::clicked, this, &VBEK::LoginForm::onSubmitButtonClicked);
+    connect(passwordInput, &QLineEdit::returnPressed, this, &bva::LoginForm::onSubmitButtonClicked);
+    connect(submitButton, &QPushButton::clicked, this, &bva::LoginForm::onSubmitButtonClicked);
 }
 
-void VBEK::LoginForm::onSubmitButtonClicked()
+void bva::LoginForm::onSubmitButtonClicked()
 {
     QString enteredID = IDInput->text();
     QString enteredPassword = passwordInput->text();
@@ -57,6 +57,6 @@ void VBEK::LoginForm::onSubmitButtonClicked()
     accept();
 }
 
-QString VBEK::LoginForm::getID() const { return userID; }
+QString bva::LoginForm::getID() const { return userID; }
 
-QString VBEK::LoginForm::getPassword() const { return userPassword; }
+QString bva::LoginForm::getPassword() const { return userPassword; }

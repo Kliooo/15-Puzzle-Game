@@ -1,5 +1,5 @@
-#ifndef LOGINFORM_H
-#define LOGINFORM_H
+#ifndef LOGINFORM_HPP
+#define LOGINFORM_HPP
 
 #include <QDialog>
 #include <QLineEdit>
@@ -7,7 +7,7 @@
 #include <QString>
 #include <QVBoxLayout>
 
-namespace VBEK {
+namespace bva {
 
 class LoginForm : public QDialog {
     Q_OBJECT
@@ -28,6 +28,7 @@ private slots:
 private:
     void setupInterface();
     void setupConnections();
+
     QLineEdit *IDInput;
     QLineEdit *passwordInput;
     QPushButton *loginButton;
@@ -39,4 +40,4 @@ private:
 
 }
 
-#endif // LOGINFORM_H
+#endif

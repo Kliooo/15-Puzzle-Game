@@ -1,5 +1,5 @@
-#ifndef PUZZLE_H
-#define PUZZLE_H
+#ifndef PUZZLE_HPP
+#define PUZZLE_HPP
 
 #include <QDialog>
 #include <QGridLayout>
@@ -9,7 +9,7 @@
 #include <QRandomGenerator>
 #include <QVBoxLayout>
 
-namespace VBEK {
+namespace bva {
 
 class Puzzle : public QDialog {
     Q_OBJECT
@@ -24,6 +24,8 @@ private slots:
 
 private:
     const int gridSize = 4;
+
+    QList<QPushButton*> cells;
     int selectedLevel;
     int emptyRow;
     int emptyColumn;
@@ -31,10 +33,8 @@ private:
     void setupInterface();
     void checkWin();
     void shufflePuzzle(QList<QPushButton*>& cells, int &emptyRow, int &emptyCol, const int gridSize);
-
-    QList<QPushButton*> cells;
 };
 
 }
 
-#endif // PUZZLE_H
+#endif

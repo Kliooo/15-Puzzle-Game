@@ -1,12 +1,12 @@
-#include "puzzle.h"
+#include "puzzle.hpp"
 
-VBEK::Puzzle::Puzzle(QWidget *parent, int selectedLevel)
+bva::Puzzle::Puzzle(QWidget *parent, int selectedLevel)
     : QDialog(parent), selectedLevel(selectedLevel)
 {
     setupInterface();
 }
 
-void VBEK::Puzzle::setupInterface()
+void bva::Puzzle::setupInterface()
 {
     setWindowTitle("15 Puzzle Game");
     QGridLayout *gridLayout = new QGridLayout(this);
@@ -61,7 +61,7 @@ void VBEK::Puzzle::setupInterface()
     setLayout(gridLayout);
 }
 
-void VBEK::Puzzle::onCellClicked(int row, int column)
+void bva::Puzzle::onCellClicked(int row, int column)
 {
     if ((row == emptyRow && abs(column - emptyColumn) == 1) || (column == emptyColumn && abs(row - emptyRow) == 1)) {
         QPushButton *clickedButton = cells[row * gridSize + column];
@@ -77,12 +77,12 @@ void VBEK::Puzzle::onCellClicked(int row, int column)
     }
 }
 
-void VBEK::Puzzle::onShuffleButtonClicked()
+void bva::Puzzle::onShuffleButtonClicked()
 {
     shufflePuzzle(cells, emptyRow, emptyColumn, gridSize);
 }
 
-void VBEK::Puzzle::onViewOriginalClicked()
+void bva::Puzzle::onViewOriginalClicked()
 {
     QDialog *originalDialog = new QDialog(this);
     originalDialog->setWindowTitle("Original Image");
@@ -101,7 +101,7 @@ void VBEK::Puzzle::onViewOriginalClicked()
     originalDialog->exec();
 }
 
-void VBEK::Puzzle::checkWin()
+void bva::Puzzle::checkWin()
 {
     QList<QImage> correctImages;
 
@@ -154,7 +154,7 @@ void VBEK::Puzzle::checkWin()
     winDialog->exec();
 }
 
-void VBEK::Puzzle::shufflePuzzle(QList<QPushButton*>& cells, int &emptyRow, int &emptyCol, const int gridSize)
+void bva::Puzzle::shufflePuzzle(QList<QPushButton*>& cells, int &emptyRow, int &emptyCol, const int gridSize)
 {
     QRandomGenerator *generator = QRandomGenerator::global();
 

@@ -1,20 +1,20 @@
-#include "mainwindow.h"
-#include "loginform.h"
-#include "levelselect.h"
-#include "puzzle.h"
+#include "15_Puzzle_Game.hpp"
+#include "loginform.hpp"
+#include "levelselect.hpp"
+#include "puzzle.hpp"
 
-VBEK::MainWindow::MainWindow(QWidget *parent)
+bva::MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), selectedLevel(0), levelOffset(0)
 {
     setupInterface();
     setupConnections();
 }
 
-VBEK::MainWindow::~MainWindow()
+bva::MainWindow::~MainWindow()
 {
 }
 
-void VBEK::MainWindow::setupInterface()
+void bva::MainWindow::setupInterface()
 {
     resize(300, 150);
     setMinimumSize(220, 100);
@@ -46,14 +46,14 @@ void VBEK::MainWindow::setupInterface()
     exitButton->setStyleSheet("background-color: red; color: white; border-radius: 15px;");
 }
 
-void VBEK::MainWindow::setupConnections()
+void bva::MainWindow::setupConnections()
 {
     connect(loginButton, &QPushButton::clicked, this, &MainWindow::onLoginButtonClicked);
     connect(exitButton, &QPushButton::clicked, this, &MainWindow::onExitButtonClicked);
     connect(playButton, &QPushButton::clicked, this, &MainWindow::onPlayButtonClicked);
 }
 
-void VBEK::MainWindow::onLoginButtonClicked()
+void bva::MainWindow::onLoginButtonClicked()
 {
     LoginForm loginForm(this);
     if (loginForm.exec() == QDialog::Accepted) {
@@ -86,7 +86,7 @@ void VBEK::MainWindow::onLoginButtonClicked()
     }
 }
 
-void VBEK::MainWindow::onExitButtonClicked()
+void bva::MainWindow::onExitButtonClicked()
 {
     if (loginButton->text() == "Login") {
         qApp->quit();
@@ -103,14 +103,14 @@ void VBEK::MainWindow::onExitButtonClicked()
     }
 }
 
-void VBEK::MainWindow::onPlayButtonClicked()
+void bva::MainWindow::onPlayButtonClicked()
 {
     LevelSelect levelSelectDialog(this, levelOffset);
     connect(&levelSelectDialog, &LevelSelect::levelSelected, this, &MainWindow::onLevelButtonClicked);
     levelSelectDialog.exec();
 }
 
-void VBEK::MainWindow::onLevelButtonClicked(int level)
+void bva::MainWindow::onLevelButtonClicked(int level)
 {
     if (levelOffset == 11) {
         selectedLevel = level * 11;

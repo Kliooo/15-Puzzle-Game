@@ -1,12 +1,12 @@
-#include "levelselect.h"
+#include "levelselect.hpp"
 
-VBEK::LevelSelect::LevelSelect(QWidget *parent, int levelOffset)
+bva::LevelSelect::LevelSelect(QWidget *parent, int levelOffset)
     : QDialog(parent), levelOffset(levelOffset)
 {
     setupInterface();
 }
 
-void VBEK::LevelSelect::setupInterface()
+void bva::LevelSelect::setupInterface()
 {
     setWindowTitle("Select Level");
     resize(300, 350);

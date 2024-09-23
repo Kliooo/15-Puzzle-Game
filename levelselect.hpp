@@ -1,5 +1,5 @@
-#ifndef LEVELSELECT_H
-#define LEVELSELECT_H
+#ifndef LEVELSELECT_HPP
+#define LEVELSELECT_HPP
 
 #include <QDialog>
 #include <QGridLayout>
@@ -8,7 +8,7 @@
 #include <QRandomGenerator>
 #include <QVBoxLayout>
 
-namespace VBEK {
+namespace bva {
 
 class LevelSelect : public QDialog {
     Q_OBJECT
@@ -21,9 +21,10 @@ signals:
 
 private:
     void setupInterface();
+
     int levelOffset;
 };
 
 }
 
-#endif // LEVELSELECT_H
+#endif

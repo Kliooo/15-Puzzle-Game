@@ -1,3 +1,5 @@
+
+
 cmake_minimum_required(VERSION 3.5)
 
 project(15_Puzzle_Game VERSION 0.1 LANGUAGES CXX)
@@ -18,8 +20,8 @@ set(RESOURCE_FILES
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
+        15_Puzzle_Game.cpp
+        15_Puzzle_Game.hpp
         mainwindow.ui
 )
 
@@ -28,9 +30,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
 		${RESOURCE_FILES}
-                loginform.h loginform.cpp
-                levelselect.h levelselect.cpp
-                puzzle.h puzzle.cpp
+                loginform.hpp loginform.cpp
+                levelselect.hpp levelselect.cpp
+                puzzle.hpp puzzle.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET 15_Puzzle_Game_Images APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

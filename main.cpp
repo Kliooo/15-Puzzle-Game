@@ -1,10 +1,10 @@
 #include <QApplication>
-#include "mainwindow.h"
+#include "15_Puzzle_Game.hpp"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    VBEK::MainWindow mainWindow;
+    bva::MainWindow mainWindow;
     mainWindow.show();
 
     return app.exec();

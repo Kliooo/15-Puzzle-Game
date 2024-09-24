@@ -1,41 +1,64 @@
 #include "levelselect.hpp"
 
 bva::LevelSelect::LevelSelect(QWidget *parent, int levelOffset)
-    : QDialog(parent), levelOffset(levelOffset)
+	: QDialog(parent), levelOffset(levelOffset)
 {
-    setupInterface();
+	setupInterface();
 }
 
 void bva::LevelSelect::setupInterface()
 {
-    setWindowTitle("Select Level");
-    resize(300, 350);
+	setWindowTitle("Select Level");
+	resize(300, 350);
 
-    QPushButton *levelButtons[5];
+	QPushButton *levelButtons[5];
 
-    QStringList defaultNames = {"Classic", "Cats", "Ryan Gosling", "Sea and Beach", "Satoru Gojo"};
-    QStringList vipNames = {"Neko Girl 1", "Random Woman", "Black Square", "Neko Girl 2", "Dinosaurs"};
-    QStringList buttonColors = {"white", "grey", "yellow", "turquoise", "blue"};
+	QStringList defaultNames = {
+		"Classic", "Cats",
+		"Ryan Gosling", "Sea and Beach",
+		"Satoru Gojo"
+	};
 
-    QVBoxLayout *levelLayout = new QVBoxLayout;
+	QStringList vipNames = {
+		"Neko Girl 1", "Random Woman",
+		"Black Square", "Neko Girl 2",
+		"Dinosaurs"
+	};
 
-    for (int i = 0; i < 5; ++i) {
-        levelButtons[i] = new QPushButton(this);
+	QStringList buttonColors = {
+		"white", "grey",
+		"yellow", "turquoise",
+		"blue"
+	};
 
-        if (levelOffset == 11) {
-            levelButtons[i]->setText(vipNames[i]);
-        } else {
-            levelButtons[i]->setText(defaultNames[i]);
-        }
+	QVBoxLayout *levelLayout = new QVBoxLayout;
 
-        QString buttonStyle = QString("background-color: %1; color: black; border-radius: 10px;").arg(buttonColors[i]);
-        levelButtons[i]->setStyleSheet(buttonStyle);
-        levelButtons[i]->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	for (int i = 0; i < 5; ++i) {
+		levelButtons[i] = new QPushButton(this);
 
-        levelLayout->addWidget(levelButtons[i]);
+		if (levelOffset == 11) {
+			levelButtons[i]->setText(vipNames[i]);
+		} else {
+			levelButtons[i]->setText(defaultNames[i]);
+		}
 
-        connect(levelButtons[i], &QPushButton::clicked, [this, i]() { emit levelSelected(i + 1); });
-    }
+		QString buttonStyle = QString(
+			"background-color: %1; "
+			"color: black; "
+			"border-radius: 10px;"
+		).arg(buttonColors[i]);
 
-    setLayout(levelLayout);
+		levelButtons[i]->setStyleSheet(buttonStyle);
+		levelButtons[i]->setSizePolicy(
+			QSizePolicy::Expanding,
+			QSizePolicy::Expanding
+		);
+
+		levelLayout->addWidget(levelButtons[i]);
+
+		connect(levelButtons[i], &QPushButton::clicked,
+				[this, i]() { emit levelSelected(i + 1); });
+	}
+
+	setLayout(levelLayout);
 }

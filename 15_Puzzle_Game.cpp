@@ -4,10 +4,10 @@
 #include "puzzle.hpp"
 
 bva::MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), selectedLevel(0), levelOffset(0)
+	: QMainWindow(parent), selectedLevel(0), levelOffset(0)
 {
-    setupInterface();
-    setupConnections();
+	setupInterface();
+	setupConnections();
 }
 
 bva::MainWindow::~MainWindow()
@@ -16,108 +16,141 @@ bva::MainWindow::~MainWindow()
 
 void bva::MainWindow::setupInterface()
 {
-    resize(300, 150);
-    setMinimumSize(220, 100);
-    setWindowTitle("Login Window");
+	resize(300, 150);
+	setMinimumSize(220, 100);
+	setWindowTitle("Login Window");
 
-    setWindowIcon(QIcon(":avatar.jpg"));
+	setWindowIcon(QIcon(":avatar.jpg"));
 
-    loginButton = new QPushButton("Login");
-    playButton = new QPushButton("Play");
-    exitButton = new QPushButton("Exit");
+	loginButton = new QPushButton("Login");
+	loginButton->setSizePolicy(
+				QSizePolicy::Expanding,
+				QSizePolicy::Expanding
+	);
+	loginButton->setStyleSheet(
+		"background-color: green; "
+		"color: white; "
+		"border-radius: 15px;"
+	);
 
-    playButton->hide();
+	playButton = new QPushButton("Play");
+	playButton->setSizePolicy(
+				QSizePolicy::Expanding,
+				QSizePolicy::Expanding
+	);
+	playButton->setStyleSheet(
+		"background-color: green; "
+		"color: white; "
+		"border-radius: 10px;"
+	);
+	playButton->hide();
 
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(loginButton);
-    layout->addWidget(playButton);
-    layout->addWidget(exitButton);
+	exitButton = new QPushButton("Exit");
+	exitButton->setSizePolicy(
+				QSizePolicy::Expanding,
+				QSizePolicy::Expanding
+	);
+	exitButton->setStyleSheet(
+		"background-color: red; "
+		"color: white; "
+		"border-radius: 15px;"
+	);
 
-    QWidget *loginWindow = new QWidget(this);
-    loginWindow->setLayout(layout);
-    setCentralWidget(loginWindow);
+	QVBoxLayout *layout = new QVBoxLayout;
+	layout->addWidget(loginButton);
+	layout->addWidget(playButton);
+	layout->addWidget(exitButton);
 
-    loginButton->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    exitButton->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    playButton->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-    loginButton->setStyleSheet("background-color: green; color: white; border-radius: 15px;");
-    playButton->setStyleSheet("background-color: green; color: white; border-radius: 10px;");
-    exitButton->setStyleSheet("background-color: red; color: white; border-radius: 15px;");
+	QWidget *loginWindow = new QWidget(this);
+	loginWindow->setLayout(layout);
+	setCentralWidget(loginWindow);
 }
 
 void bva::MainWindow::setupConnections()
 {
-    connect(loginButton, &QPushButton::clicked, this, &MainWindow::onLoginButtonClicked);
-    connect(exitButton, &QPushButton::clicked, this, &MainWindow::onExitButtonClicked);
-    connect(playButton, &QPushButton::clicked, this, &MainWindow::onPlayButtonClicked);
+	connect(loginButton, &QPushButton::clicked,
+			this, &MainWindow::onLoginButtonClicked);
+	connect(exitButton, &QPushButton::clicked,
+			this, &MainWindow::onExitButtonClicked);
+	connect(playButton, &QPushButton::clicked,
+			this, &MainWindow::onPlayButtonClicked);
 }
 
 void bva::MainWindow::onLoginButtonClicked()
 {
-    LoginForm loginForm(this);
-    if (loginForm.exec() == QDialog::Accepted) {
-        QString enteredID = loginForm.getID();
-        QString enteredPassword = loginForm.getPassword();
+	LoginForm loginForm(this);
+	if (loginForm.exec() == QDialog::Accepted) {
+		QString enteredID = loginForm.getID();
+		QString enteredPassword = loginForm.getPassword();
 
-        if (enteredID == "VIP" && enteredPassword == "666") {
-            levelOffset = 11;
-        } else if (!enteredID.isEmpty() && !enteredPassword.isEmpty()) {
-            levelOffset = 1;
-        }
+		if (enteredID == "VIP" && enteredPassword == "666") {
+			levelOffset = 11;
+		} else if (!enteredID.isEmpty() && !enteredPassword.isEmpty()) {
+			levelOffset = 1;
+		}
 
-        if (!enteredID.isEmpty() && !enteredPassword.isEmpty()) {
-            loginButton->setText(enteredID);
-            loginButton->setStyleSheet("background-color: grey; color: white; border-radius: 10px;");
-            loginButton->setEnabled(false);
+		if (!enteredID.isEmpty() && !enteredPassword.isEmpty()) {
+			loginButton->setText(enteredID);
+			loginButton->setStyleSheet(
+				"background-color: grey; "
+				"color: white; "
+				"border-radius: 10px;"
+			);
+			loginButton->setEnabled(false);
 
-            exitButton->setText("Log out");
+			exitButton->setText("Log out");
 
-            disconnect(exitButton, nullptr, nullptr, nullptr);
-            connect(exitButton, &QPushButton::clicked, this, &MainWindow::onExitButtonClicked);
+			disconnect(exitButton, nullptr, nullptr, nullptr);
+			connect(exitButton, &QPushButton::clicked,
+					this, &MainWindow::onExitButtonClicked);
 
-            playButton->show();
+			playButton->show();
 
-            QDialog *dialog = qobject_cast<QDialog *>(sender()->parent());
-            if (dialog) {
-                dialog->accept();
-            }
-        }
-    }
+			QDialog *dialog = qobject_cast<QDialog *>(sender()->parent());
+			if (dialog) {
+				dialog->accept();
+			}
+		}
+	}
 }
 
 void bva::MainWindow::onExitButtonClicked()
 {
-    if (loginButton->text() == "Login") {
-        qApp->quit();
-    } else {
-        loginButton->setText("Login");
-        loginButton->setStyleSheet("background-color: green; color: white; border-radius: 15px;");
-        loginButton->setEnabled(true);
+	if (loginButton->text() == "Login") {
+		qApp->quit();
+	} else {
+		loginButton->setText("Login");
+		loginButton->setStyleSheet(
+			"background-color: green; "
+			"color: white; "
+			"border-radius: 15px;"
+		);
+		loginButton->setEnabled(true);
 
-        exitButton->setText("Exit");
-        playButton->hide();
+		exitButton->setText("Exit");
+		playButton->hide();
 
-        selectedLevel = 0;
-        levelOffset = 0;
-    }
+		selectedLevel = 0;
+		levelOffset = 0;
+	}
 }
 
 void bva::MainWindow::onPlayButtonClicked()
 {
-    LevelSelect levelSelectDialog(this, levelOffset);
-    connect(&levelSelectDialog, &LevelSelect::levelSelected, this, &MainWindow::onLevelButtonClicked);
-    levelSelectDialog.exec();
+	LevelSelect levelSelectDialog(this, levelOffset);
+	connect(&levelSelectDialog, &LevelSelect::levelSelected,
+			this, &MainWindow::onLevelButtonClicked);
+	levelSelectDialog.exec();
 }
 
 void bva::MainWindow::onLevelButtonClicked(int level)
 {
-    if (levelOffset == 11) {
-        selectedLevel = level * 11;
-    } else {
-        selectedLevel = level;
-    }
+	if (levelOffset == 11) {
+		selectedLevel = level * 11;
+	} else {
+		selectedLevel = level;
+	}
 
-    Puzzle *puzzleGame = new Puzzle(this, selectedLevel);
-    puzzleGame->exec();
+	Puzzle *puzzleGame = new Puzzle(this, selectedLevel);
+	puzzleGame->exec();
 }

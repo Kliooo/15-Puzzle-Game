@@ -14,6 +14,14 @@ namespace bva {
 class Puzzle : public QDialog {
     Q_OBJECT
 
+private:
+	QList<QPushButton*> cells;
+
+	const int gridSize = 4;
+	int selectedLevel;
+	int emptyRow;
+	int emptyColumn;
+
 public:
     explicit Puzzle(QWidget *parent = nullptr, int selectedLevel = 1);
 
@@ -23,13 +31,6 @@ private slots:
     void onViewOriginalClicked();
 
 private:
-    const int gridSize = 4;
-
-    QList<QPushButton*> cells;
-    int selectedLevel;
-    int emptyRow;
-    int emptyColumn;
-
     void setupInterface();
     void checkWin();
     void shufflePuzzle(QList<QPushButton*>& cells, int &emptyRow, int &emptyCol, const int gridSize);

@@ -12,6 +12,17 @@ namespace bva {
 class LoginForm : public QDialog {
     Q_OBJECT
 
+
+private:
+	QPushButton *loginButton;
+	QPushButton *submitButton;
+
+	QLineEdit *IDInput;
+	QLineEdit *passwordInput;
+
+	QString userID;
+	QString userPassword;
+
 public:
     explicit LoginForm(QWidget *parent = nullptr);
 
@@ -26,16 +37,8 @@ private slots:
     void onSubmitButtonClicked();
 
 private:
-    void setupInterface();
-    void setupConnections();
-
-    QLineEdit *IDInput;
-    QLineEdit *passwordInput;
-    QPushButton *loginButton;
-    QPushButton *submitButton;
-
-    QString userID;
-    QString userPassword;
+	void setupInterface();
+	void setupConnections();
 };
 
 }

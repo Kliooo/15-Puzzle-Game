@@ -13,6 +13,9 @@ namespace bva {
 class LevelSelect : public QDialog {
     Q_OBJECT
 
+private:
+	int levelOffset;
+
 public:
     explicit LevelSelect(QWidget *parent = nullptr, int levelOffset = 1);
 
@@ -20,9 +23,7 @@ signals:
     void levelSelected(int level);
 
 private:
-    void setupInterface();
-
-    int levelOffset;
+	void setupInterface();
 };
 
 }
